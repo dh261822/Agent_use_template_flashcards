@@ -13,7 +13,9 @@ F5. Practice mode: show one English word, click to reveal German.
 F6. "Next" button shows a random different card.
 F7. Count how many cards I marked "I knew it" this session.
 ).
-## Acceptance criteria (how I know a feature works)- F1: Empty fields cannot be submitted. After adding, the form is cleared.- F4: After reload, all pairs are still there.- F6: The same card never appears twice in a row (if there are 2+ cards).
-## Out of scope (do NOT build)- No login, no server, no database- No frameworks or libraries (no React, no jQuery, no Bootstrap)- No sound, no animations beyond simple CSS transitions- No mobile app
+## Acceptance criteria (how I know a feature works)- 
+F1: Empty fields cannot be submitted. After adding, the form is cleared.- F4: After reload, all pairs are still there.- F6: The same card never appears twice in a row (if there are 2+ cards).
+## Out of scope (do NOT build)- No login, no server, no database- 
+No frameworks or libraries (no React, no jQuery, no Bootstrap)- No sound, no animations beyond simple CSS transitions- No mobile app
 ## Look & feel
-Simple, readable, one column, max width ~600px, one accent colour
+Simple, readable, one column, max width ~600px, one accent colour.
