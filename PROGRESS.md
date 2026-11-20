@@ -5,9 +5,11 @@ F1 umgesetzt mit Copilot: Used prompt: Task: Feature 1  aus Spec.md implementier
 F2 umgesetzt: Wortpaare werden nach dem Hinzufügen in einer Liste angezeigt.
 F3 umgesetzt: Einträge können nach Bestätigung einzeln gelöscht werden.
 
+F3 doch umgesetzt! Verständnisfehler, nach Eingabe von Wortaar erscheint der Button zur Löschung des Eintrags!
+
 ## Next
-F4: Wortpaare in localStorage speichern.
+F5: Übungsmodus mit Karte anzeigen.
 
 ## Decisions & notes
-Wortpaare liegen aktuell nur im Arbeitsspeicher und sind nach einem Neuladen weg. Speicherung kommt mit F4.
+Wortpaare werden in localStorage gespeichert und nach einem Neuladen wieder angezeigt.
 ## Known problems

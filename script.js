@@ -3,7 +3,93 @@ const englishWordInput = document.getElementById("english-word");
 const germanWordInput = document.getElementById("german-word");
 const emptyListMessage = document.getElementById("empty-list-message");
 const wordPairList = document.getElementById("word-pair-list");
-const wordPairs = [];
+const storageErrorMessage = document.getElementById("storage-error");
+const storageKey = "vocabularyFlashcardsWordPairs";
+let storageReady = true;
+
+// Shows an error when browser storage cannot be used.
+function showStorageError(message) {
+  storageErrorMessage.textContent = message;
+  storageErrorMessage.hidden = false;
+}
+
+// Reads saved data and reports browser storage access errors.
+function readStoredData() {
+  try {
+    return window.localStorage.getItem(storageKey);
+  } catch (error) {
+    if (!(error instanceof DOMException)) {
+      throw error;
+    }
+
+    storageReady = false;
+    showStorageError("Wortpaare konnten nicht aus dem Browserspeicher geladen werden.");
+    return null;
+  }
+}
+
+// Checks that saved data contains English and German words.
+function hasValidWordPairs(pairs) {
+  if (!Array.isArray(pairs)) {
+    return false;
+  }
+
+  for (let index = 0; index < pairs.length; index += 1) {
+    const pair = pairs[index];
+    if (!pair || typeof pair.english !== "string" || typeof pair.german !== "string") {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// Parses saved data and reports invalid JSON or pair formats.
+function parseStoredData(savedData) {
+  let savedPairs;
+  try {
+    savedPairs = JSON.parse(savedData);
+  } catch (error) {
+    if (!(error instanceof SyntaxError)) {
+      throw error;
+    }
+
+    storageReady = false;
+    showStorageError("Gespeicherte Wortpaare sind ungültig und konnten nicht geladen werden.");
+    return [];
+  }
+
+  if (!hasValidWordPairs(savedPairs)) {
+    storageReady = false;
+    showStorageError("Gespeicherte Wortpaare haben ein ungültiges Format.");
+    return [];
+  }
+
+  return savedPairs;
+}
+
+// Saves the current word pairs in browser storage.
+function saveWordPairs() {
+  if (!storageReady) {
+    return false;
+  }
+
+  try {
+    window.localStorage.setItem(storageKey, JSON.stringify(wordPairs));
+    storageErrorMessage.hidden = true;
+    return true;
+  } catch (error) {
+    if (!(error instanceof DOMException)) {
+      throw error;
+    }
+
+    showStorageError("Wortpaare konnten nicht im Browserspeicher gespeichert werden.");
+    return false;
+  }
+}
+
+const storedData = readStoredData();
+const wordPairs = storedData === null ? [] : parseStoredData(storedData);
 
 // Stores a valid word pair and clears the form.
 function addWordPair(event) {
@@ -23,8 +109,13 @@ function addWordPair(event) {
     return;
   }
 
-  wordPairForm.reset();
   wordPairs.push({ english: englishWord, german: germanWord });
+  if (!saveWordPairs()) {
+    wordPairs.pop();
+    return;
+  }
+
+  wordPairForm.reset();
   renderWordPairs();
 }
 
@@ -73,9 +164,14 @@ function deleteWordPair(event) {
     return;
   }
 
+  const deletedPair = wordPairs[pairIndex];
   wordPairs.splice(pairIndex, 1);
-  renderWordPairs();
+  if (!saveWordPairs()) {
+    wordPairs.splice(pairIndex, 0, deletedPair);
+    return;
+  }
 
+  renderWordPairs();
 }
 
 wordPairForm.addEventListener("submit", addWordPair);

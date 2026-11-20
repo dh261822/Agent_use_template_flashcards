@@ -41,6 +41,10 @@ button {
   cursor: pointer;
 }
 
+.storage-error {
+  color: #9b1c1c;
+}
+
 .word-pairs-section {
   margin-top: 32px;
 }
