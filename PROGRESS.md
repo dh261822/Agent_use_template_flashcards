@@ -9,7 +9,8 @@ F3 doch umgesetzt! Verständnisfehler, nach Eingabe von Wortaar erscheint der Bu
 
 F5 ausgeführt! Wenn man üben möchte, startet es mit den englischen Wörtern, nachdem man ein paar Wortpaare eingetragen hat. 
 F6 umgesetzt: „Nächste Karte“ wählt zufällig eine andere Karte. Ein paar andere Wortpaare hinzugefügt.
-F7 umgesetzt: Jede Karte kann einmal pro Sitzung als bekannt markiert werden.
+F7 umgesetzt: Jede Karte kann einmal pro Sitzung als bekannt markiert werden. Man kann es als "i knew it" markieren! ACHTUNG: nicht Progress.d in Copilot rüberzeiehen! Übernimmt dann auch die Dokumentation in Progress.md 
+Teils ist das meine Doku, teils die von Copilot, ganz weird! :D
 
 ## Next
 
