@@ -50,6 +50,16 @@ button {
 }
 
 .word-pairs-section li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   padding: 8px 0;
   border-bottom: 1px solid #ddd;
+}
+
+.word-pairs-section button {
+  flex-shrink: 0;
+  padding: 6px 10px;
+  font-size: 0.9rem;
 }

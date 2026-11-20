@@ -43,10 +43,42 @@ function renderWordPairs() {
     const listItem = document.createElement("li");
     listItem.textContent =
       wordPairs[index].english + " — " + wordPairs[index].german;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.textContent = "Löschen";
+    deleteButton.dataset.index = index;
+    listItem.appendChild(deleteButton);
     wordPairList.appendChild(listItem);
   }
 }
 
+// Deletes a word pair after the user confirms the action.
+function deleteWordPair(event) {
+  if (event.target.tagName !== "BUTTON") {
+    return;
+  }
+
+  const pairIndex = Number(event.target.dataset.index);
+  if (
+    !Number.isInteger(pairIndex) ||
+    pairIndex < 0 ||
+    pairIndex >= wordPairs.length
+  ) {
+    return;
+  }
+
+  const shouldDelete = window.confirm("Möchtest du dieses Wortpaar löschen?");
+  if (!shouldDelete) {
+    return;
+  }
+
+  wordPairs.splice(pairIndex, 1);
+  renderWordPairs();
+
+}
+
 wordPairForm.addEventListener("submit", addWordPair);
 wordPairForm.addEventListener("input", clearValidationMessages);
+wordPairList.addEventListener("click", deleteWordPair);
 renderWordPairs();
