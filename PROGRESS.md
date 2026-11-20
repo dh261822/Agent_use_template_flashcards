@@ -8,7 +8,7 @@ F3 umgesetzt: Einträge können nach Bestätigung einzeln gelöscht werden.
 F3 doch umgesetzt! Verständnisfehler, nach Eingabe von Wortaar erscheint der Button zur Löschung des Eintrags!
 
 F5 ausgeführt! Wenn man üben möchte, startet es mit den englischen Wörtern, nachdem man ein paar Wortpaare eingetragen hat. 
-F6 umgesetzt: „Nächste Karte“ wählt zufällig eine andere Karte.
+F6 umgesetzt: „Nächste Karte“ wählt zufällig eine andere Karte. Ein paar andere Wortpaare hinzugefügt.
 
 ## Next
 F7: Zähler für „I knew it“ ergänzen.
