@@ -9,9 +9,9 @@ F3 doch umgesetzt! Verständnisfehler, nach Eingabe von Wortaar erscheint der Bu
 
 F5 ausgeführt! Wenn man üben möchte, startet es mit den englischen Wörtern, nachdem man ein paar Wortpaare eingetragen hat. 
 F6 umgesetzt: „Nächste Karte“ wählt zufällig eine andere Karte. Ein paar andere Wortpaare hinzugefügt.
+F7 umgesetzt: Jede Karte kann einmal pro Sitzung als bekannt markiert werden.
 
 ## Next
-F7: Zähler für „I knew it“ ergänzen.
 
 ## Decisions & notes
 Wortpaare werden in localStorage gespeichert und nach einem Neuladen wieder angezeigt.

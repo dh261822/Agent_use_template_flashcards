@@ -6,6 +6,8 @@ const wordPairList = document.getElementById("word-pair-list");
 const storageErrorMessage = document.getElementById("storage-error");
 const flashcard = document.getElementById("flashcard");
 const nextCardButton = document.getElementById("next-card");
+const markKnownButton = document.getElementById("mark-known");
+const knownCountMessage = document.getElementById("known-count");
 const storageKey = "vocabularyFlashcardsWordPairs";
 let storageReady = true;
 
@@ -92,6 +94,7 @@ function saveWordPairs() {
 
 const storedData = readStoredData();
 const wordPairs = storedData === null ? [] : parseStoredData(storedData);
+const knownPairs = [];
 let currentCardIndex = 0;
 let answerIsVisible = false;
 
@@ -153,6 +156,8 @@ function renderWordPairs() {
 // Shows the English word or its German translation on the card.
 function renderPracticeCard() {
   nextCardButton.disabled = wordPairs.length < 2;
+  markKnownButton.disabled =
+    wordPairs.length === 0 || isCurrentCardMarkedKnown();
 
   if (wordPairs.length === 0) {
     flashcard.disabled = true;
@@ -187,6 +192,33 @@ function showNextCard() {
   currentCardIndex =
     randomIndex >= currentCardIndex ? randomIndex + 1 : randomIndex;
   answerIsVisible = false;
+  renderPracticeCard();
+}
+
+// Checks whether the current card was already marked this session.
+function isCurrentCardMarkedKnown() {
+  if (wordPairs.length === 0) {
+    return false;
+  }
+
+  const currentPair = wordPairs[currentCardIndex];
+  for (let index = 0; index < knownPairs.length; index += 1) {
+    if (knownPairs[index] === currentPair) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+// Marks the current card as known and updates the session count.
+function markCurrentCardKnown() {
+  if (wordPairs.length === 0 || isCurrentCardMarkedKnown()) {
+    return;
+  }
+
+  knownPairs.push(wordPairs[currentCardIndex]);
+  knownCountMessage.textContent = "I knew it: " + knownPairs.length;
   renderPracticeCard();
 }
 
@@ -227,4 +259,5 @@ wordPairForm.addEventListener("input", clearValidationMessages);
 wordPairList.addEventListener("click", deleteWordPair);
 flashcard.addEventListener("click", togglePracticeCard);
 nextCardButton.addEventListener("click", showNextCard);
+markKnownButton.addEventListener("click", markCurrentCardKnown);
 renderWordPairs();
