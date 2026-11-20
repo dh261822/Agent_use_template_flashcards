@@ -7,9 +7,12 @@ F3 umgesetzt: Einträge können nach Bestätigung einzeln gelöscht werden.
 
 F3 doch umgesetzt! Verständnisfehler, nach Eingabe von Wortaar erscheint der Button zur Löschung des Eintrags!
 
+F5 ausgeführt! Wenn man üben möchte, startet es mit den englischen Wörtern, nachdem man ein paar Wortpaare eingetragen hat. 
+
 ## Next
-F5: Übungsmodus mit Karte anzeigen.
+F5 umgesetzt: Englisch erscheint auf einer anklickbaren Karte; Klick zeigt Deutsch.
 
 ## Decisions & notes
 Wortpaare werden in localStorage gespeichert und nach einem Neuladen wieder angezeigt.
 ## Known problems
+F6: Nächste zufällige Karte ist noch nicht umgesetzt.

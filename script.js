@@ -4,6 +4,7 @@ const germanWordInput = document.getElementById("german-word");
 const emptyListMessage = document.getElementById("empty-list-message");
 const wordPairList = document.getElementById("word-pair-list");
 const storageErrorMessage = document.getElementById("storage-error");
+const flashcard = document.getElementById("flashcard");
 const storageKey = "vocabularyFlashcardsWordPairs";
 let storageReady = true;
 
@@ -90,6 +91,8 @@ function saveWordPairs() {
 
 const storedData = readStoredData();
 const wordPairs = storedData === null ? [] : parseStoredData(storedData);
+let currentCardIndex = 0;
+let answerIsVisible = false;
 
 // Stores a valid word pair and clears the form.
 function addWordPair(event) {
@@ -142,6 +145,33 @@ function renderWordPairs() {
     listItem.appendChild(deleteButton);
     wordPairList.appendChild(listItem);
   }
+
+  renderPracticeCard();
+}
+
+// Shows the English word or its German translation on the card.
+function renderPracticeCard() {
+  if (wordPairs.length === 0) {
+    flashcard.disabled = true;
+    flashcard.textContent = "Füge zuerst ein Wortpaar hinzu.";
+    return;
+  }
+
+  flashcard.disabled = false;
+  const currentPair = wordPairs[currentCardIndex];
+  flashcard.textContent = answerIsVisible
+    ? currentPair.german
+    : currentPair.english;
+}
+
+// Reveals or hides the translation when the card is clicked.
+function togglePracticeCard() {
+  if (wordPairs.length === 0) {
+    return;
+  }
+
+  answerIsVisible = !answerIsVisible;
+  renderPracticeCard();
 }
 
 // Deletes a word pair after the user confirms the action.
@@ -171,10 +201,13 @@ function deleteWordPair(event) {
     return;
   }
 
+  currentCardIndex = 0;
+  answerIsVisible = false;
   renderWordPairs();
 }
 
 wordPairForm.addEventListener("submit", addWordPair);
 wordPairForm.addEventListener("input", clearValidationMessages);
 wordPairList.addEventListener("click", deleteWordPair);
+flashcard.addEventListener("click", togglePracticeCard);
 renderWordPairs();
