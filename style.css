@@ -40,3 +40,16 @@ button {
   font: inherit;
   cursor: pointer;
 }
+
+.word-pairs-section {
+  margin-top: 32px;
+}
+
+.word-pairs-section ul {
+  padding-left: 24px;
+}
+
+.word-pairs-section li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
