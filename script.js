@@ -5,6 +5,7 @@ const emptyListMessage = document.getElementById("empty-list-message");
 const wordPairList = document.getElementById("word-pair-list");
 const storageErrorMessage = document.getElementById("storage-error");
 const flashcard = document.getElementById("flashcard");
+const nextCardButton = document.getElementById("next-card");
 const storageKey = "vocabularyFlashcardsWordPairs";
 let storageReady = true;
 
@@ -151,6 +152,8 @@ function renderWordPairs() {
 
 // Shows the English word or its German translation on the card.
 function renderPracticeCard() {
+  nextCardButton.disabled = wordPairs.length < 2;
+
   if (wordPairs.length === 0) {
     flashcard.disabled = true;
     flashcard.textContent = "Füge zuerst ein Wortpaar hinzu.";
@@ -171,6 +174,19 @@ function togglePracticeCard() {
   }
 
   answerIsVisible = !answerIsVisible;
+  renderPracticeCard();
+}
+
+// Shows a random card that is different from the current card.
+function showNextCard() {
+  if (wordPairs.length < 2) {
+    return;
+  }
+
+  const randomIndex = Math.floor(Math.random() * (wordPairs.length - 1));
+  currentCardIndex =
+    randomIndex >= currentCardIndex ? randomIndex + 1 : randomIndex;
+  answerIsVisible = false;
   renderPracticeCard();
 }
 
@@ -210,4 +226,5 @@ wordPairForm.addEventListener("submit", addWordPair);
 wordPairForm.addEventListener("input", clearValidationMessages);
 wordPairList.addEventListener("click", deleteWordPair);
 flashcard.addEventListener("click", togglePracticeCard);
+nextCardButton.addEventListener("click", showNextCard);
 renderWordPairs();

@@ -87,3 +87,7 @@ button {
   background-color: #777;
   cursor: not-allowed;
 }
+
+.next-card-button {
+  margin-top: 12px;
+}
